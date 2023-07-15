@@ -1,0 +1,4 @@
+(lang dune 3.9)
+
+; This files enables building and testing all the examples from the project root.
+; Run: `dune build @all @runtest -w`
