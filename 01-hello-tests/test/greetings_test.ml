@@ -32,7 +32,7 @@ let%test_unit _ = [%test_eq: Base.int] (1 + 2) 3
 (* Again, we test equality, so the order does not matter *)
 let%test_unit _ = [%test_eq: Base.int] 3 (1 + 2)
 
-(* To make things slightly easier to read, I will introduce a custom operator *)
+(* To make things slightly easier to read, We will introduce this custom operator *)
 let%test_unit _ =
   let ( => ) = [%test_eq: Base.int] in
   1 + 1 => 2
@@ -43,3 +43,10 @@ let%test_unit _ =
   1 + 1 => 2;
   1 + 2 => 3;
   1 + 3 => 4
+
+(* Finally, we want to test our library code! *)
+let%test _ = "Hello, World!" = My_lib.Greetings.world
+
+let%test_unit _ =
+  let ( => ) = [%test_eq: Base.string] in
+  My_lib.Greetings.world => "Hello, World!"

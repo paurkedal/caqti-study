@@ -67,9 +67,34 @@ Also, you should install the following dependencies:
 
 ```
 opam install caqti
+opam install caqti-driver-postgresql
+opam install caqti-lwt
+opam install caqti-async
+opam install ppx_rapper
 
 # Those are for testing
 opam install base
 opam install ppx_assert
 opam install ppx_inline_test
 ```
+
+## Database setup
+
+As long as you have a "standard" postgreSQL installation, you should be able to easily run a **local** database on port 5433
+
+- make db-init
+- make db-start
+- make db-create
+- make db-psql
+  - or just use: `PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 psql`
+
+Also check these commands:
+
+- make db-status
+- make db-refresh
+
+## Running all the tests
+
+Ensure that the database is running by issuing `make db-status` (refer to the database setup above)
+
+Then run: `PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune build @all @runtest`
