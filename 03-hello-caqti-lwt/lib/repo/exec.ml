@@ -27,6 +27,6 @@ end
    utop # Exec.add conn 1 2;;
    - : (int, [> Caqti_error.call_or_retrieve ]) result = Ok 3
  *)
-let add (module Conn : Caqti_blocking.CONNECTION) a b =
+let add (module Conn : Caqti_lwt.CONNECTION) a b =
   Conn.find Q.add (a, b)
 [@@ocamlformat "disable"]

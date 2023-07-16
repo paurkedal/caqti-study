@@ -26,7 +26,7 @@ NOTE:
 We also introduce an `init.mli` file. Any function listed in this file will be public/exported. The REPL wont't be able to call any private functions (good!).
 
 ```
-cd ./02-hello-caqti
+cd ./02-hello-caqti-blocking
 PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune exec ./bin/main.exe
 PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune dune runtest --watch
 ```
