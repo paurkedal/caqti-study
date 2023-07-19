@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (preprocess
+  (pps ppx_let))
+ (libraries repo async ppx_let core_unix.command_unix))

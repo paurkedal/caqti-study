@@ -6,8 +6,8 @@
 
    Caqti requires this interface for further work.
   *)
-let module_of_conn (conn : Caqti_lwt.connection) =
-  (module (val conn) : Caqti_lwt.CONNECTION)
+let module_of_conn (conn : Caqti_async.connection) =
+  (module (val conn) : Caqti_async.CONNECTION)
 
 (* If we can get access to some env vars, we construct a special URI to use our local DB.
    Otherwise, we return a default URI. We would then use our system DB.
@@ -29,10 +29,11 @@ let get_uri () =
   | None -> "postgresql://"
 
 let connect () =
-  let ( let* ) = Lwt_result.bind in
   let uri = get_uri () in
-  let* conn = Caqti_lwt.connect (Uri.of_string uri) in
-  Ok conn |> Result.map module_of_conn |> Lwt.return
+  let ( let* ) t f = Async.Deferred.Result.bind t ~f in
+  let* conn = Caqti_async.connect (Uri.of_string uri) in
+  let x = Ok conn |> Result.map module_of_conn |> Async.return in
+  x
 
 (*
    This function exists mainly to simplify `utop` interactions.
@@ -45,8 +46,7 @@ let connect () =
  *)
 
 let connect_exn () =
-  let conn_promise = connect () in
-  match Lwt_main.run conn_promise with
+  match Async.Thread_safe.block_on_async_exn connect with
   | Error err ->
       let msg =
         Printf.sprintf "Abort! We could not get a connection. (err=%s)\n"

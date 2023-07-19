@@ -1,0 +1,8 @@
+(library
+ (name repo)
+ (libraries
+  caqti
+  caqti-driver-postgresql
+  caqti-async
+  async
+  core_unix.command_unix))

@@ -68,7 +68,9 @@ Also, you should install the following dependencies:
 ```
 opam install caqti
 opam install caqti-driver-postgresql
+opam install lwt
 opam install caqti-lwt
+opam install async
 opam install caqti-async
 opam install ppx_rapper
 
