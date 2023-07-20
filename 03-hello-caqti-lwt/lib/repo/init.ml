@@ -34,16 +34,8 @@ let connect () =
   let* conn = Caqti_lwt.connect (Uri.of_string uri) in
   Ok conn |> Result.map module_of_conn |> Lwt.return
 
-(*
-   This function exists mainly to simplify `utop` interactions.
-
-   $ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune utop
-   utop # open Repo;;
-   utop # let conn = Init.connect_exn ();;
-
-   Also see: `Exec.add`
+(** For `utop` interactions interactions. See `README.md`.
  *)
-
 let connect_exn () =
   let conn_promise = connect () in
   match Lwt_main.run conn_promise with

@@ -33,14 +33,7 @@ let connect () =
   let uri = get_uri () in
   Caqti_blocking.connect (Uri.of_string uri) |> Result.map module_of_conn
 
-(*
-   This function exists mainly to simplify `utop` interactions.
-
-   $ dune utop
-   utop # open Repo;;
-   utop # let conn = Init.connect_exn ();;
-
-   Also see: `Exec.add`
+(** For `utop` interactions interactions. See `README.md`.
  *)
 let connect_exn () =
   match connect () with

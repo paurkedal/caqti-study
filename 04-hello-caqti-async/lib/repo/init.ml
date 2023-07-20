@@ -35,16 +35,8 @@ let connect () =
   let x = Ok conn |> Result.map module_of_conn |> Async.return in
   x
 
-(*
-   This function exists mainly to simplify `utop` interactions.
-
-   $ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune utop
-   utop # open Repo;;
-   utop # let conn = Init.connect_exn ();;
-
-   Also see: `Exec.add`
+(** For `utop` interactions interactions. See `README.md`.
  *)
-
 let connect_exn () =
   match Async.Thread_safe.block_on_async_exn connect with
   | Error err ->

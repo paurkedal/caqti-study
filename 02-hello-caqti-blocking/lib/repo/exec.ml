@@ -20,13 +20,6 @@ end
 
 (* Now we use our query definitions *)
 
-(*
-   $ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune utop
-   utop # open Repo;;
-   utop # let conn = Init.connect_exn ();;
-   utop # Exec.add conn 1 2;;
-   - : (int, [> Caqti_error.call_or_retrieve ]) result = Ok 3
- *)
 let add (module Conn : Caqti_blocking.CONNECTION) a b =
   Conn.find Q.add (a, b)
 [@@ocamlformat "disable"]

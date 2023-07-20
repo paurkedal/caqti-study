@@ -31,6 +31,15 @@ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune exec ./bin/main.exe
 PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune dune runtest --watch
 ```
 
+```
+$ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune utop
+utop # open Repo;;
+utop # let conn = Init.connect_exn ();;
+val conn : (module Caqti_blocking.CONNECTION) = <module>
+utop # Exec.add conn 1 2;;
+- : (int, [> Caqti_error.call_or_retrieve ]) result = Ok 3
+```
+
 ## A note on error handling
 
 Here, we introduce the concepts of monads.
