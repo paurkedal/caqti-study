@@ -1,0 +1,6 @@
+(library
+ (name repo_test)
+ (inline_tests)
+ (libraries repo)
+ (preprocess
+  (pps ppx_inline_test ppx_assert)))

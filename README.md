@@ -93,7 +93,7 @@ As long as you have a "standard" postgreSQL installation, you should be able to 
 Also check these commands:
 
 - make db-status
-- make db-refresh
+- make db-reset
 
 ## Running all the tests
 

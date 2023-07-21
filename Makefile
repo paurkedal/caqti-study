@@ -64,7 +64,7 @@ db-psql:
 # db-migrate:
 # 	psql -d $(DB_NAME) --single-transaction -f ./db/init.sql
 
-db-refresh:
+db-reset:
 	$(MAKE) db-drop
 	$(MAKE) db-create
 #	$(MAKE) db-migrate
