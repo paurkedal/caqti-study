@@ -28,7 +28,7 @@ We also introduce an `init.mli` file. Any function listed in this file will be p
 ```
 cd ./02-hello-caqti-blocking
 PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune exec ./bin/main.exe
-PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune dune runtest --watch
+PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune runtest --watch
 ```
 
 ```

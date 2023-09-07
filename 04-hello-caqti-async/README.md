@@ -60,7 +60,7 @@ See the tests for more details.
 ```
 cd ./04-hello-caqti-async
 PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune exec ./bin/main.exe
-PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune dune runtest --watch
+PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune runtest --watch
 ```
 
 ```
