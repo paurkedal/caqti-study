@@ -21,18 +21,13 @@ module Q = struct
   *)
 
   let insert =
-    Caqti_type.(tup2 int int ->. unit)
+    Caqti_type.(t2 int int ->. unit)
       {|
        INSERT INTO bibliography (author_id, book_id) VALUES (?, ?)
       |}
 
-  let x = Caqti_type.(unit ->* tup2 (tup2 string string) string)
-
-  (* Example showing how to go beyond tup4 (there is no tup5) *)
   let ls =
-    Caqti_type.(
-      unit
-      ->* tup2 int (tup2 string (tup2 string (tup2 (option string) string))))
+    Caqti_type.(unit ->* t5 int string string (option string) string)
       {|
        SELECT x.id
             , b.title
@@ -49,7 +44,7 @@ module Q = struct
       |}
 
   let ls' =
-    Caqti_type.(unit ->* tup2 int string)
+    Caqti_type.(unit ->* t2 int string)
       {|
        SELECT x.id
             , b.title

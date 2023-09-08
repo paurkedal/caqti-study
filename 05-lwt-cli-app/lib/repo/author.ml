@@ -1,3 +1,10 @@
+type t = {
+  id : int;
+  first_name : string;
+      (* middle_name : string option; *)
+      (* last_name : string; *)
+}
+
 module Q = struct
   open Caqti_request.Infix
 
@@ -10,22 +17,43 @@ module Q = struct
     ->. expects no row
   *)
 
+  (* FIXME: Caqti seems to have some kind of low-level decoding bug. *)
+  let author =
+    let intro id
+        first_name
+          (* middle_name  *)
+          (* last_name *) =
+      {
+        id;
+        first_name
+        (* middle_name*)
+        (* last_name *);
+      }
+    in
+    Caqti_type.Std.(
+      product intro
+      @@ proj int (fun x -> x.id)
+      @@ proj string (fun x -> x.first_name)
+      (* @@ proj (option string) (fun x -> x.middle_name) *)
+      (* @@ proj string (fun x -> x.last_name) *)
+      @@ proj_end)
+
   let insert =
-    Caqti_type.(tup3 string (option string) string ->. unit)
+    Caqti_type.(t3 string (option string) string ->. unit)
       {|
        INSERT INTO author (first_name, middle_name, last_name)
        VALUES (?, ?, ?)
       |}
 
   let insert' =
-    Caqti_type.(tup3 string (option string) string ->! int)
+    Caqti_type.(t3 string (option string) string ->! int)
       {|
        INSERT INTO author (first_name, middle_name, last_name)
        VALUES (?, ?, ?) RETURNING id
       |}
 
   let find_by_id =
-    Caqti_type.(int ->? tup3 int string string)
+    Caqti_type.(int ->? t3 int string string)
       {|
        SELECT id, first_name, last_name
        FROM author
@@ -33,21 +61,21 @@ module Q = struct
       |}
 
   let ls =
-    Caqti_type.(unit ->* tup3 int string string)
+    Caqti_type.(unit ->* t3 int string string)
       {|
        SELECT id, first_name, last_name
        FROM author
       |}
 
   let ls' =
-    Caqti_type.(unit ->* tup2 int string)
+    Caqti_type.(unit ->* author)
       {|
        SELECT id, first_name
        FROM author
       |}
 
   let update =
-    Caqti_type.(tup3 int string string ->. unit)
+    Caqti_type.(t3 int string string ->. unit)
       {|
        UPDATE author
          SET first_name =  ?

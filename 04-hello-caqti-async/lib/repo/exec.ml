@@ -13,7 +13,7 @@ module Q = struct
 
   (* `add` takes 2 ints (as a tuple), and returns 1 int *)
   let add =
-    Caqti_type.(tup2 int int ->! int)
+    Caqti_type.(t2 int int ->! int)
     "SELECT ? + ?"
   [@@ocamlformat "disable"]
 end

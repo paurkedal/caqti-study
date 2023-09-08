@@ -58,6 +58,6 @@ utop # open Repo;;
 utop # let conn = Init.connect_exn ();;
 utop # Init.create_tables conn;;
 utop # Init.seed conn;;
-utop # Bibliography.ls conn ();;
+utop # Bibliography.ls conn;;
 utop # Author.insert conn { first_name = "John"; last_name = "Doe"; middle_name = None };;
 ```

@@ -16,13 +16,12 @@ let err_log fmt = Printf.printf ("[ERROR] " ^^ fmt ^^ "\n%!")
 let longest_book_name bibliography =
   List.fold_left
     (fun longest
-         ( _id,
-           (book_name, (_author_fname, (_author_middle_name, _author_lname))) ) ->
+         (_id, book_name, _author_fname, _author_middle_name, _author_lname) ->
       max longest (String.length book_name))
     0 bibliography
 
 let print_item padding
-    (_id, (book_name, (author_fname, (_author_middle_name, author_lname)))) =
+    (_id, book_name, author_fname, _author_middle_name, author_lname) =
   Printf.printf "%-*s: %s %s\n" padding book_name author_fname author_lname
 
 (*

@@ -31,7 +31,7 @@ let get_uri () =
 let connect () =
   let ( let* ) = Lwt_result.bind in
   let uri = get_uri () in
-  let* conn = Caqti_lwt.connect (Uri.of_string uri) in
+  let* conn = Caqti_lwt_unix.connect (Uri.of_string uri) in
   Ok conn |> Result.map module_of_conn |> Lwt.return
 
 (** For `utop` interactions interactions. See `README.md`.

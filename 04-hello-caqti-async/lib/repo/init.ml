@@ -32,8 +32,7 @@ let connect () =
   let uri = get_uri () in
   let ( let* ) t f = Async.Deferred.Result.bind t ~f in
   let* conn = Caqti_async.connect (Uri.of_string uri) in
-  let x = Ok conn |> Result.map module_of_conn |> Async.return in
-  x
+  Async.return @@ Result.map module_of_conn (Ok conn)
 
 (** For `utop` interactions interactions. See `README.md`.
  *)
