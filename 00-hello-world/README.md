@@ -13,3 +13,11 @@ cd ./00-hello-world
 # Compile and run `main.ml`
 dune exec ./bin/main.exe
 ```
+
+You can also load your project into a REPL, with `dune utop`
+
+```ocaml
+# open My_lib;;
+# Greetings.world;;
+- : string = "Hello, World!"
+```

@@ -91,7 +91,7 @@ let%test_unit "PostgreSQL: add (asynchronously, just for fun)" =
 Note that you may also use `ppx_expect` which has the benefit of allowing testing async functions without
 introducing the `Async.Thread_safe.block_on_async_exn` function.
 
-For this to work, uou need to open Async globally, and add these 2 dependencies:
+For this to work, you need to open Async globally, and add these 2 dependencies:
 
 - ppx_expect
 - ppx_sexp_conv

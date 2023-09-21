@@ -33,11 +33,20 @@ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune exec ./bin/main.exe
 PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune runtest --watch
 ```
 
+## Test via the REPL
+
+NOTE: `utop` can resolve promises automagically. Rather than using the `resolve_ok_exn` helper, try to evaluate only the promise at the prompt.
+
 ```
 $ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune utop
-utop # open Repo;;
-utop # let conn = Init.connect_exn ();;
+```
+
+```ocaml
+# open Repo;;
+# let conn = Init.connect_exn ();;
 val conn : (module Caqti_lwt.CONNECTION) = <module>
-utop # Exec.add conn 1 2;;
-- : (int, [> Caqti_error.call_or_retrieve ]) result = Ok 3
+# let promise = Exec.add conn 1 2;;
+val promise : (int, [> Caqti_error.call_or_retrieve ]) result Lwt.t = <abstr>
+# Repo.Exec.resolve_ok_exn promise;;
+- : int = 3
 ```

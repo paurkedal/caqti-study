@@ -1,3 +1,5 @@
 (library
  (name my_lib)
  (libraries))
+
+(mdx)
