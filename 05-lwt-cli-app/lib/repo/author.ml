@@ -1,8 +1,8 @@
 type t = {
   id : int;
   first_name : string;
-      (* middle_name : string option; *)
-      (* last_name : string; *)
+  middle_name : string option;
+  last_name : string;
 }
 
 module Q = struct
@@ -17,25 +17,16 @@ module Q = struct
     ->. expects no row
   *)
 
-  (* FIXME: Caqti seems to have some kind of low-level decoding bug. *)
   let author =
-    let intro id
-        first_name
-          (* middle_name  *)
-          (* last_name *) =
-      {
-        id;
-        first_name
-        (* middle_name*)
-        (* last_name *);
-      }
+    let intro id first_name middle_name last_name =
+      { id; first_name; middle_name; last_name }
     in
     Caqti_type.Std.(
       product intro
       @@ proj int (fun x -> x.id)
       @@ proj string (fun x -> x.first_name)
-      (* @@ proj (option string) (fun x -> x.middle_name) *)
-      (* @@ proj string (fun x -> x.last_name) *)
+      @@ proj (option string) (fun x -> x.middle_name)
+      @@ proj string (fun x -> x.last_name)
       @@ proj_end)
 
   let insert =
@@ -70,7 +61,7 @@ module Q = struct
   let ls' =
     Caqti_type.(unit ->* author)
       {|
-       SELECT id, first_name
+       SELECT id, first_name, middle_name, last_name
        FROM author
       |}
 
