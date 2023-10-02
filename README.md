@@ -3,6 +3,8 @@ meant to be checked out and used for learning.
 
 This is currently work in progress.
 
+NOTE: a reading order is suggested below. One of the objectives of this directed study is to take an OCaml beginner from zero to hero, to quickly get a feel of what it's like to work with a database and OCaml. More experienced may want to skip certain sections obviously.
+
 [Caqti]: https://github.com/paurkedal/ocaml-caqti/
 
 ---
@@ -97,6 +99,17 @@ Also check these commands:
 
 ## Running all the tests
 
-Ensure that the database is running by issuing `make db-status` (refer to the database setup above)
+To double-check you're all set, you may want to run the project's test suite with:
 
-Then run: `PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune build @all @runtest`
+`PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune build @all @runtest`
+
+Running and adding more tests is also a good way to make improvements to this repo if you feel like contributing.
+
+## Suggested reading order
+
+- [Hello World: setup a basic OCaml project](study/hello-world)
+- [Hello Tests: learn how to test](study/hello-tests)
+- [Hello Caqti (blocking)](study/hello-caqti-blocking)
+- [Hello Caqti Lwt (promises)](study/hello-caqti-lwt)
+- [Hello Caqti Async (promises, another flavor)](study/hello-caqti-async)
+- [Create a CLI app with Caqti/Lwt](study/lwt-cli-app)
