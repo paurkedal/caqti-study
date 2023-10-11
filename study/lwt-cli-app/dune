@@ -1,2 +1,2 @@
 (mdx
- (libraries repo lwt))
+ (libraries repo caqti caqti-lwt lwt))

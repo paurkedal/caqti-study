@@ -5,7 +5,7 @@ Now, we will talk to our database sequentially with `caqti`, via its "blocking" 
 We will gain the following abilities:
 
 - talk to our database via a REPL (calling into our lib)
-- talk to our database via starting our application (`bin/main.ml`)
+- talk to our database via our application (`bin/main.ml`)
 - validate that our code always works by implementing some tests
 
 We introduce 2 functions inside the `Init` module:

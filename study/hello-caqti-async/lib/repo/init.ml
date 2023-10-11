@@ -1,14 +1,3 @@
-(*
-   "Unpack" the `Caqti_lwt.CONNECTION` into a module, by creating an anonymous
-    `first-class module` with the `val` keyword (on the left).
-
-   See: https://dev.realworldocaml.org/first-class-modules.html
-
-   Caqti requires this interface for further work.
-  *)
-let module_of_conn (conn : Caqti_async.connection) =
-  (module (val conn) : Caqti_async.CONNECTION)
-
 (* If we can get access to some env vars, we construct a special URI to use our local DB.
    Otherwise, we return a default URI. We would then use our system DB.
 
@@ -30,9 +19,7 @@ let get_uri () =
 
 let connect () =
   let uri = get_uri () in
-  let ( let* ) t f = Async.Deferred.Result.bind t ~f in
-  let* conn = Caqti_async.connect (Uri.of_string uri) in
-  Async.return @@ Result.map module_of_conn (Ok conn)
+  Caqti_async.connect (Uri.of_string uri)
 
 (** For `utop` interactions interactions. See `README.md`.
  *)
