@@ -1,0 +1,6 @@
+(library
+ (name my_lib_test)
+ (inline_tests)
+ (libraries my_lib)
+ (preprocess
+  (pps ppx_inline_test ppx_assert)))

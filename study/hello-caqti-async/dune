@@ -1,0 +1,8 @@
+(library
+ (name example)
+ (libraries async)
+ (preprocess
+  (pps ppx_let)))
+
+(mdx
+ (libraries repo async async_kernel async_unix))

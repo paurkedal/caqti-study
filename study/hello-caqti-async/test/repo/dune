@@ -1,0 +1,7 @@
+(library
+ (name repo_test)
+ (inline_tests
+  (deps hello.txt))
+ (libraries repo async core_unix.command_unix)
+ (preprocess
+  (pps ppx_inline_test ppx_assert ppx_expect ppx_sexp_conv ppx_let)))
