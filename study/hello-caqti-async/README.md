@@ -104,11 +104,11 @@ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune runtest --watch
 # let conn = Init.connect_exn ();;
 val conn : (module Caqti_async.CONNECTION) = <module>
 
-# let future_add = Exec.add conn 1 2;;
+# let future_add = Exec.mul conn 3 4;;
 val future_add : (int, [> Caqti_error.call_or_retrieve ]) result Deferred.t =
   <abstr>
 
 # open Async;;
 # Thread_safe.block_on_async_exn @@ fun () -> future_add;;
-- : (int, [> Caqti_error.call_or_retrieve ]) result = Ok 3
+- : (int, [> Caqti_error.call_or_retrieve ]) result = Ok 12
 ```

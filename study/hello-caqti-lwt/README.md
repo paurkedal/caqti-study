@@ -44,9 +44,23 @@ $ PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune utop
 ```ocaml
 # open Repo;;
 # let conn = Init.connect_exn ();;
-val conn : (module Caqti_lwt.CONNECTION) = <module>
+val conn : Caqti_lwt.connection = <module>
 # let promise = Exec.add conn 1 2;;
 val promise : (int, [> Caqti_error.call_or_retrieve ]) result Lwt.t = <abstr>
-# Repo.Exec.resolve_ok_exn promise;;
+```
+
+```ocaml
+# open Repo;;
+# let conn = Init.connect_exn ();;
+val conn : Caqti_lwt.connection = <module>
+# let promise_add = Exec.add conn 1 2;;
+val promise_add : (int, [> Caqti_error.call_or_retrieve ]) result Lwt.t =
+  <abstr>
+# Repo.Exec.resolve_ok_exn promise_add;;
 - : int = 3
+# let promise_mul = Exec.mul conn 3 4;;
+val promise_mul : (int, [> Caqti_error.call_or_retrieve ]) result Lwt.t =
+  <abstr>
+# Repo.Exec.resolve_ok_exn promise_mul;;
+- : int = 12
 ```
