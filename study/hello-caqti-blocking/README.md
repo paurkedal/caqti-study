@@ -10,9 +10,11 @@ We will gain the following abilities:
 
 We introduce 2 functions inside the `Init` module:
 
-- `connect ()`, which returns either a "connection module", or an error
-- `connect_exn ()` which returns a "connection module" and fails at runtime if something's wrong
+- `connect ()`, which returns either a connection, or an error
+- `connect_exn ()` which returns a connection and fails at runtime if something's wrong
     - we will use this function in the REPL sessions.
+
+Have a look at the `Exec` module for additional details regarding the proper usage of connections with Caqti.
 
 NOTE:
 

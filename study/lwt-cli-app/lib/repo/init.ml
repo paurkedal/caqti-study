@@ -32,7 +32,7 @@ let connect_exn () =
           (Caqti_error.show err)
       in
       failwith msg
-  | Ok module_ -> module_
+  | Ok conn -> conn
 
 module Q = struct
   open Caqti_request.Infix
