@@ -1,0 +1,49 @@
+(*
+
+  To install the dependencies listed in this file, run:
+    opam install . --deps-only
+
+  ---
+
+  To optionally isolate these dependencies to the current folder, create a "switch" like so:
+    opam switch create . {OCAML_VERSION} --deps-only
+
+  Or optionally install as a global switch with a custom name:
+    opam switch create caqti-study 5.1.0
+
+  ---
+
+  Run this to find the latest OCaml version:
+    opam switch list-available | grep -E 'base-compiler.+Official'
+
+  ---
+
+  To find your current switch configuration, run:
+    opam switch
+
+  ---
+
+  Other useful commands:
+    - opam switch       # find currently installed switches
+    - opam switch 5.1.0 # change to the 5.10 switch configuration
+
+*)
+
+opam-version: "2.0"
+
+depends: [
+  "caqti" { >= "2.0.1" }
+
+  "caqti-driver-postgresql"
+  "caqti-lwt"
+  "caqti-async"
+  "ppx_rapper"
+
+  # Below is for testing only
+  "base"
+  "ppx_assert"
+  "ppx_inline_test"
+
+  # Below is for documentation purposes
+  "mdx"
+]

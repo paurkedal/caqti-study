@@ -65,21 +65,11 @@ We will also:
 
 You must have a working installation of PostgreSQL.
 
-Also, you should install the following dependencies:
+Also, you may run the following command to install the dependencies:
 
 ```
-opam install caqti
-opam install caqti-driver-postgresql
-opam install lwt
-opam install caqti-lwt
-opam install async
-opam install caqti-async
-opam install ppx_rapper
-
-# Those are for testing
-opam install base
-opam install ppx_assert
-opam install ppx_inline_test
+# Or install packages manually, see: dev.opam
+opam install . --deps-only
 ```
 
 ## Database setup
@@ -101,7 +91,12 @@ Also check these commands:
 
 To double-check you're all set, you may want to run the project's test suite with:
 
-`PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune build @all @runtest`
+```
+PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune build
+
+# We run the tests in a single thread currently, see: issues/9.
+PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune runtest -j1
+```
 
 Running and adding more tests is also a good way to make improvements to this repo if you feel like contributing.
 
