@@ -38,11 +38,14 @@ depends: [
   "caqti-lwt"
   "caqti-async"
   "ppx_rapper"
+  "ppx_rapper_lwt"
 
   # Below is for testing only
   "base"
   "ppx_assert"
   "ppx_inline_test"
+  "sexplib"
+  "ppx_sexp_conv"
 
   # Below is for documentation purposes
   "mdx"

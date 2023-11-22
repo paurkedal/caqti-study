@@ -108,3 +108,4 @@ Running and adding more tests is also a good way to make improvements to this re
 - [Hello Caqti Lwt (promises)](study/hello-caqti-lwt)
 - [Hello Caqti Async (promises, another flavor)](study/hello-caqti-async)
 - [Create a CLI app with Caqti/Lwt](study/lwt-cli-app)
+- [Hello Ppx_rapper(code-gen to reduce boilerplate)](study/hello-ppx_rapper)
