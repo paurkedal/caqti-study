@@ -48,7 +48,7 @@ We can still keep our old API if it were for whatever reason necessary.
 
 We've also got a list of fake users to play with
 ```ocaml
-# open Repo.Fake_users
+# open Repo.Fake_users;;
 # Repo.Exec.resolve_ok_exn @@ Repo.Fake_users.fake_users () conn |> List.map (fun user -> user.email);;
 - : string list =
 ["user1@example.com"; "user2@example.com"; "user3@example.com";
