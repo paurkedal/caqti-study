@@ -4,9 +4,9 @@ Let's take a look at [ppx_rapper](https://github.com/roddyyaga/ppx_rapper)!
 
 We have already seen what PPXs are, so we are good to go!
 
-Have a look at the `Exec` module. We converted queries from the [hello-caqti](hello-caqti-lwt) project, to a much shorter syntax. Although, we have to adjust the SQL slightly in order to satisfy ppx_rapper's requirements.
+Have a look at the [Exec](lib/repo/exec.ml) module. We converted queries from the [hello-caqti-lwt](../hello-caqti-lwt) project, to a much shorter syntax. Although, we have to adjust the SQL slightly in order to satisfy ppx_rapper's requirements.
 
-Also take a look `Fake_users` module for other types of usage, and as always the tests.
+Also take a look [Fake_users](lib/repo/fake_users.ml) module for other types of usage, and as always the tests.
 
 **NOTE**
 
