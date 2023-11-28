@@ -19,7 +19,7 @@ let series' =
 
 type user = { user_id : int; email : string; is_account_active : bool }
 
-(* [record_out] maps to our user above, thanks to type inference! *)
+(* [record_out] maps to our user type above, thanks to type inference! *)
 let fake_users =
   [%rapper
     get_many

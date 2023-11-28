@@ -5,11 +5,6 @@
     - PGHOST=localhost PGDATABASE=caqti_study PGPORT=5433 dune build @all @runtest --watch
  *)
 
-let%test_unit "OCaml: add" =
-  let ( => ) = [%test_eq: Base.int] in
-  1 + 2 => 3;
-  2 + 3 => 5
-
 let str_error promise =
   Lwt.bind promise (fun res ->
       res |> Result.map_error Caqti_error.show |> Lwt.return)
