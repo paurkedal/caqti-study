@@ -37,6 +37,8 @@ depends: [
   "caqti-driver-postgresql"
   "caqti-lwt"
   "caqti-async"
+  "caqti-eio"
+  "eio_main"
   "ppx_rapper"
   "ppx_rapper_lwt"
 
@@ -46,6 +48,7 @@ depends: [
   "ppx_inline_test"
   "sexplib"
   "ppx_sexp_conv"
+  "utop"
 
   # Below is for documentation purposes
   "mdx"
