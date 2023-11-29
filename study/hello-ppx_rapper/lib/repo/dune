@@ -1,0 +1,5 @@
+(library
+ (name repo)
+ (preprocess
+  (pps ppx_rapper))
+ (libraries caqti caqti-driver-postgresql caqti-lwt.unix ppx_rapper_lwt))

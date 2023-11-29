@@ -1,0 +1,2 @@
+(mdx
+ (libraries lwt repo caqti-lwt ppx_rapper_lwt))

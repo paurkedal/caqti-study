@@ -1,0 +1,11 @@
+(library
+ (name repo_test)
+ (inline_tests)
+ (libraries repo sexplib)
+ (preprocess
+  (pps
+   ppx_inline_test
+   ppx_assert
+   ppx_sexp_conv ; for @@deriving sexp
+   ppx_deriving.ord ; for @@deriving sexp
+   )))
