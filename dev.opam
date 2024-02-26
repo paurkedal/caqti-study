@@ -37,6 +37,8 @@ depends: [
   "caqti-driver-postgresql"
   "caqti-lwt"
   "caqti-async"
+  "async"
+  "caqti-eio"
   "ppx_rapper"
   "ppx_rapper_lwt"
 
@@ -49,4 +51,8 @@ depends: [
 
   # Below is for documentation purposes
   "mdx"
+]
+
+pin-depends: [
+  "ppx_rapper.3.1.0" "git+https://github.com/roddyyaga/ppx_rapper#2222edbbe68db7ba1ab0c7a2688c227ea5c0f230"
 ]
