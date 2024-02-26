@@ -39,6 +39,7 @@ depends: [
   "caqti-async"
   "async"
   "caqti-eio"
+  "eio_main"
   "ppx_rapper"
   "ppx_rapper_lwt"
 
