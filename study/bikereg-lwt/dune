@@ -1,0 +1,4 @@
+(executable
+ (name bikereg)
+ (modules bikereg)
+ (libraries caqti caqti-driver-postgresql caqti-lwt caqti-lwt.unix))

@@ -63,17 +63,14 @@ We will also:
 
 ## Prerequisites
 
-- PostgreSQL server
+You must have a working installation of PostgreSQL.
 
-  See [Database setup](#database-setup)
+Also, you may run the following command to install the dependencies:
 
-- Postgresql development libraries
-
-  These can be found in `libpq-dev` on Debian-based systems, `libpq-devel` on Fedora and `postgresql-libs` on Arch
-
-- Caqti and ppx_rapper
-
-  These can be installed via `opam install . --deps-only`, and will require OCaml 5 for the Eio examples. If you're on a lower version, you'll have to install the required packages from dev.opam manually.
+```
+# Or install packages manually, see: dev.opam
+opam install . --deps-only
+```
 
 ## Database setup
 
