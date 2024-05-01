@@ -1,15 +1,10 @@
 (*
 
-  To install the dependencies listed in this file, run:
-    opam install . --deps-only
-
-  ---
-
   To optionally isolate these dependencies to the current folder, create a "switch" like so:
     opam switch create . {OCAML_VERSION} --deps-only
 
   Or optionally install as a global switch with a custom name:
-    opam switch create caqti-study 5.1.0
+    opam switch create caqti-study 5.1.1
 
   ---
 
@@ -24,18 +19,27 @@
   ---
 
   Other useful commands:
-    - opam switch       # find currently installed switches
-    - opam switch 5.1.0 # change to the 5.10 switch configuration
+    - opam switch             # find currently installed switches
+    - opam switch caqti-study # change to the named switch configuration
+
+  ---
+
+  To install the dependencies listed in this file, run:
+    - opam pin add git+https://github.com/roddyyaga/ppx_rapper#2222edbbe68db7ba1ab0c7a2688c227ea5c0f230
+      - this temporary measure "pins" multiple packages
+    - opam install . --deps-only
 
 *)
 
 opam-version: "2.0"
 
 depends: [
-  "caqti" { >= "2.0.1" }
+  "caqti" { = "2.1.1" }
 
   "caqti-driver-postgresql"
+  "lwt"
   "caqti-lwt"
+  "async"
   "caqti-async"
   "caqti-eio"
   "eio_main"
@@ -43,13 +47,14 @@ depends: [
   "ppx_rapper_lwt"
 
   # Below is for testing only
-  "base"
-  "ppx_assert"
-  "ppx_inline_test"
-  "sexplib"
-  "ppx_sexp_conv"
-  "utop"
+  "base"            {with-test}
+  "ppx_assert"      {with-test}
+  "ppx_inline_test" {with-test}
+  "sexplib"         {with-test}
+  "ppx_sexp_conv"   {with-test}
+  "utop"            {with-test}
 
   # Below is for documentation purposes
   "mdx"
 ]
+
