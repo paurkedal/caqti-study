@@ -53,8 +53,8 @@ module Q = struct
     "INSERT INTO bikereg (frameno, owner) VALUES (?, ?)"
 
   let report_stolen =
-    string ->. unit @@
-    "UPDATE bikereg SET stolen = current_timestamp WHERE frameno = ?"
+    t2 string string ->. unit @@
+    "UPDATE bikereg SET stolen = ? WHERE frameno = ?"
 
   let select_stolen =
     unit ->* bike @@
@@ -79,7 +79,7 @@ let create_bikereg (module Db : Caqti_lwt.CONNECTION) =
 let reg_bike (module Db : Caqti_lwt.CONNECTION) frameno owner =
   Db.exec Q.reg_bike (frameno, owner)
 let report_stolen (module Db : Caqti_lwt.CONNECTION) frameno =
-  Db.exec Q.report_stolen frameno
+  Db.exec Q.report_stolen ("2024-05-01-T09:05:00", frameno)
 
 (* Db.find runs a query which must return at most one row.  The result is a
  * option, since it's common to seach for entries which don't exist. *)
