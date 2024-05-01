@@ -1,3 +1,8 @@
+---
+sidebar_position: 3
+title: Bikereg EIO
+---
+
 # Bike registration example (over eio)
 
 This simple program demonstrates:
