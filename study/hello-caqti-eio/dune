@@ -4,5 +4,6 @@
   eio_main
   ; below are extra dependencies specifically required for the MDX compilation
   ; they differ from the dependencies of bin/lib, slightly
+  eio
   caqti-eio
   eio.unix))
