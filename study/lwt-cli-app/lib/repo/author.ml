@@ -70,7 +70,7 @@ module Q = struct
       {|
        UPDATE author
          SET first_name =  ?
-       , SET last_name  = ?
+       , last_name  = ?
        WHERE id = ?
       |}
 
