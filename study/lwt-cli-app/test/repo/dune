@@ -1,6 +1,6 @@
 (library
  (name repo_test)
- (inline_tests)
+ (inline_tests (flags (-partition lwt_cli_app)))
  (libraries repo)
  (preprocess
   (pps ppx_inline_test ppx_assert)))
