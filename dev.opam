@@ -33,8 +33,18 @@
 
 opam-version: "2.0"
 
+synopsis:
+  "Pseudo-package for pulling in dependecies for the Caqti study project"
+maintainer: "Petter A. Urkedal <paurkedal@gmail.com>"
+authors: [
+  "Benjamin Thomas <benjamin.guy.thomas@gmail.com>"
+  "Petter A. Urkedal <paurkedal@gmail.com>"
+]
+homepage: "https://github.com/paurkedal/caqti-study"
+bug-reports: "https://github.com/paurkedal/caqti-study/issues"
+license: "MIT"
 depends: [
-  "caqti" { = "2.1.1" }
+  "caqti" { <= "3.0.0" }
 
   "caqti-driver-postgresql"
   "lwt"
