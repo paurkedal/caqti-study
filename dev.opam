@@ -1,15 +1,15 @@
 (*
 
   To optionally isolate these dependencies to the current folder, create a "switch" like so:
-    opam switch create . {OCAML_VERSION} --deps-only
+    opam switch create . OCAML-VERSION --deps-only
 
   Or optionally install as a global switch with a custom name:
-    opam switch create caqti-study 5.1.1
+    opam switch create caqti-study OCAML-VERSION
 
   ---
 
   Run this to find the latest OCaml version:
-    opam switch list-available | grep -E 'base-compiler.+Official'
+    opam switch list-available base | grep Official
 
   ---
 
@@ -25,9 +25,7 @@
   ---
 
   To install the dependencies listed in this file, run:
-    - opam pin add git+https://github.com/roddyyaga/ppx_rapper#2222edbbe68db7ba1ab0c7a2688c227ea5c0f230
-      - this temporary measure "pins" multiple packages
-    - opam install . --deps-only
+    - opam install --deps-only -td .
 
 *)
 
@@ -44,7 +42,7 @@ homepage: "https://github.com/paurkedal/caqti-study"
 bug-reports: "https://github.com/paurkedal/caqti-study/issues"
 license: "MIT"
 depends: [
-  "caqti" { <= "3.0.0" }
+  "caqti" {>= "2.1.2" & < "3.0.0~"}
 
   "caqti-driver-postgresql"
   "lwt"
