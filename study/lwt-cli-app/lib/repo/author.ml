@@ -32,14 +32,14 @@ module Q = struct
   let insert =
     Caqti_type.(t3 string (option string) string ->. unit)
       {|
-       INSERT INTO author (first_name, middle_name, last_name)
+       INSERT INTO $.author (first_name, middle_name, last_name)
        VALUES (?, ?, ?)
       |}
 
   let insert' =
     Caqti_type.(t3 string (option string) string ->! int)
       {|
-       INSERT INTO author (first_name, middle_name, last_name)
+       INSERT INTO $.author (first_name, middle_name, last_name)
        VALUES (?, ?, ?) RETURNING id
       |}
 
@@ -47,7 +47,7 @@ module Q = struct
     Caqti_type.(int ->? t3 int string string)
       {|
        SELECT id, first_name, last_name
-       FROM author
+       FROM $.author
        WHERE id = ?
       |}
 
@@ -55,20 +55,20 @@ module Q = struct
     Caqti_type.(unit ->* t3 int string string)
       {|
        SELECT id, first_name, last_name
-       FROM author
+       FROM $.author
       |}
 
   let ls' =
     Caqti_type.(unit ->* author)
       {|
        SELECT id, first_name, middle_name, last_name
-       FROM author
+       FROM $.author
       |}
 
   let update =
     Caqti_type.(t3 int string string ->. unit)
       {|
-       UPDATE author
+       UPDATE $.author
          SET first_name =  ?
        , last_name  = ?
        WHERE id = ?
@@ -77,13 +77,13 @@ module Q = struct
   let delete =
     Caqti_type.(int ->. unit)
       {|
-       DELETE FROM author
+       DELETE FROM $.author
        WHERE id = ?
       |}
 
   let count =
     Caqti_type.(unit ->! int) {|
-    SELECT COUNT(*) FROM author
+    SELECT COUNT(*) FROM $.author
     |}
 end
 

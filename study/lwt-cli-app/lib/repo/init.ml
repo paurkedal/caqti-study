@@ -17,9 +17,23 @@ let get_uri () =
       Printf.sprintf "postgresql://%s:%s/%s" pg_host pg_port pg_database
   | None -> "postgresql://"
 
+(* This is passed when creating a database connection, and provides a way to
+ * parametrize our query strings. *)
+let get_env () =
+  let schema =
+    Option.value ~default:"caqti_study" (Sys.getenv_opt "PGSCHEMA")
+  in
+  fun _driver_info -> function
+    (* For brevity, we use the zero-length variable name to refer to the
+     * database schema, see the usage and comment below. *)
+    | "" -> Caqti_query.L schema
+    (* Caqti will handle Not_found and report the variable as undefined. *)
+    | _ -> raise Not_found
+
 let connect () =
   let uri = get_uri () in
-  Caqti_lwt_unix.connect (Uri.of_string uri)
+  let env = get_env () in
+  Caqti_lwt_unix.connect ~env (Uri.of_string uri)
 
 (** For `utop` interactions interactions. See `README.md`.
  *)
@@ -37,10 +51,20 @@ let connect_exn () =
 module Q = struct
   open Caqti_request.Infix
 
+  (* The query strings are actually templates which will be expanded by Caqti
+   * before sending them to the database.  We utilise this to parametrize the
+   * name of the database schema.  For brevity we choose the zero-length
+   * variable "$()" for this. *)
+  let create_schema = Caqti_type.(unit ->. unit) "CREATE SCHEMA $()"
+
+  (* Further, "$." is a shortcut for qualifying database tables with the schema
+   * name "$()" used above.  That is, if the schema name is empty, it expands to
+   * nothing, otherwise it expands to the schema name followed by a period. *)
+
   let create_author_tbl =
     Caqti_type.(unit ->. unit)
       {|
-         CREATE TABLE author
+         CREATE TABLE $.author
            ( id          INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY
            , first_name  TEXT NOT NULL CHECK (LENGTH(first_name) < 255)
            , middle_name TEXT     NULL CHECK (LENGTH(first_name) < 255)
@@ -51,7 +75,7 @@ module Q = struct
   let create_book_tbl =
     Caqti_type.(unit ->. unit)
       {|
-         CREATE TABLE book
+         CREATE TABLE $.book
            ( id               INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY
            , title            TEXT    NOT NULL UNIQUE CHECK (LENGTH(title) < 255)
            , back_cover_descr TEXT        NULL
@@ -61,22 +85,45 @@ module Q = struct
   let create_bibliography_tbl =
     Caqti_type.(unit ->. unit)
       {|
-         CREATE TABLE bibliography
+         CREATE TABLE $.bibliography
            ( id        INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-           , book_id   INTEGER NOT NULL REFERENCES book(id)
-           , author_id INTEGER NOT NULL REFERENCES author(id)
+           , book_id   INTEGER NOT NULL REFERENCES $.book(id)
+           , author_id INTEGER NOT NULL REFERENCES $.author(id)
            )
       |}
+
+  (* Queries to tear down our database schema.  We could CASCADE the DROP
+   * SCHEMA, but removing tables explicitly is safer in case someone accidentaly
+   * created another table inside our schema. *)
+  let drop_schema =
+    Caqti_type.(unit ->. unit) "DROP SCHEMA IF EXISTS $()"
+  let drop_author_tbl =
+    Caqti_type.(unit ->. unit) "DROP TABLE IF EXISTS $.author"
+  let drop_book_tbl =
+    Caqti_type.(unit ->. unit) "DROP TABLE IF EXISTS $.book"
+  let drop_bibliography_tbl =
+    Caqti_type.(unit ->. unit) "DROP TABLE IF EXISTS $.bibliography"
 end
 
-let create_tables (module Conn : Caqti_lwt.CONNECTION) =
+let setup (module Conn : Caqti_lwt.CONNECTION) =
   let open Lwt_result.Syntax in
   let* () = Conn.start () in
+  let* () = Conn.exec Q.create_schema () in
   let* () = Conn.exec Q.create_author_tbl () in
   let* () = Conn.exec Q.create_book_tbl () in
   let* () = Conn.exec Q.create_bibliography_tbl () in
   let* () = Conn.commit () in
   Lwt.return_ok () (* Optional line. For clarity and symetry *)
+
+let teardown (module Conn : Caqti_lwt.CONNECTION) =
+  let open Lwt_result.Syntax in
+  let* () = Conn.start () in
+  let* () = Conn.exec Q.drop_bibliography_tbl () in
+  let* () = Conn.exec Q.drop_book_tbl () in
+  let* () = Conn.exec Q.drop_author_tbl () in
+  let* () = Conn.exec Q.drop_schema () in
+  let* () = Conn.commit () in
+  Lwt.return_ok ()
 
 let transact (module Conn : Caqti_lwt.CONNECTION) fn =
   let open Lwt_result.Syntax in

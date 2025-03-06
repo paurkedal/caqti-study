@@ -23,7 +23,7 @@ module Q = struct
   let insert =
     Caqti_type.(t2 int int ->. unit)
       {|
-       INSERT INTO bibliography (author_id, book_id) VALUES (?, ?)
+       INSERT INTO $.bibliography (author_id, book_id) VALUES (?, ?)
       |}
 
   let ls =
@@ -34,12 +34,12 @@ module Q = struct
             , a.first_name
             , a.middle_name
             , a.last_name
-       FROM bibliography AS x
+       FROM $.bibliography AS x
 
-       INNER JOIN author AS a
+       INNER JOIN $.author AS a
                ON a.id = x.author_id
 
-       INNER JOIN book AS b
+       INNER JOIN $.book AS b
                ON b.id = x.book_id
       |}
 
@@ -48,12 +48,12 @@ module Q = struct
       {|
        SELECT x.id
             , b.title
-       FROM bibliography AS x
+       FROM $.bibliography AS x
 
-       INNER JOIN author AS a
+       INNER JOIN $.author AS a
                ON a.id = x.author_id
 
-       INNER JOIN book AS b
+       INNER JOIN $.book AS b
                ON b.id = x.book_id
       |}
 end

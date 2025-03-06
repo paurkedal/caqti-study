@@ -11,25 +11,25 @@ module Q = struct
   *)
 
   let count = Caqti_type.(unit ->! int) {|
-    SELECT COUNT(*) FROM book
+    SELECT COUNT(*) FROM $.book
     |}
 
-  let ls = Caqti_type.(unit ->* t2 int string) {|SELECT id, title FROM book|}
+  let ls = Caqti_type.(unit ->* t2 int string) {|SELECT id, title FROM $.book|}
 
   let find_by_id =
     Caqti_type.(int ->? t2 int string)
-      {|SELECT id, title FROM book WHERE id = ?|}
+      {|SELECT id, title FROM $.book WHERE id = ?|}
 
   let insert =
     Caqti_type.(string ->. unit)
       {|
-       INSERT INTO book (title) VALUES (?)
+       INSERT INTO $.book (title) VALUES (?)
       |}
 
   let insert' =
     Caqti_type.(string ->! int)
       {|
-       INSERT INTO book (title) VALUES (?) RETURNING id
+       INSERT INTO $.book (title) VALUES (?) RETURNING id
       |}
 end
 
