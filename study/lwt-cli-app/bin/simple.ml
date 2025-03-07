@@ -31,7 +31,7 @@ let () =
   let work : ('bibliography, 'error) result Lwt.t =
     let open Lwt_result.Syntax in
     let* conn = Init.connect () in
-    let* () = Init.create_tables conn in
+    let* () = Init.setup conn in
     let* () = Init.seed conn in
     Bibliography.ls conn
   in
