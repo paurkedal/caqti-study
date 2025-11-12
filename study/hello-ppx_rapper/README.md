@@ -1,5 +1,7 @@
 # Hello, ppx_rapper!
 
+*This chapter has been disabled for now, awaiting a `ppx_rapper` release.*
+
 Let's take a look at [ppx_rapper](https://github.com/roddyyaga/ppx_rapper)!
 
 We have already seen what PPXs are, so we are good to go!
